@@ -1,6 +1,6 @@
 # Razzle x After.js w/ Redux and Styled-Components
 
-Baked inside is Redux with Styled-Components. Rebass is also included in the project.
+This is another demo project to get more familiar with razzle and after js. Project has redux and material ui inside.
 
 Feature based folder structure based off of teachings from Max Stoiber and Mark Erikson.
 
