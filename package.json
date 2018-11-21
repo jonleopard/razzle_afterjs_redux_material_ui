@@ -10,17 +10,19 @@
   },
   "dependencies": {
     "@jaredpalmer/after": "latest",
+    "@material-ui/core": "^3.5.1",
     "express": "^4.16.2",
+    "material-ui": "^0.20.2",
+    "prop-types": "^15.6.2",
     "razzle": "^2.4.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-helmet": "^5.2.0",
+    "react-jss": "^8.6.1",
     "react-redux": "^5.1.1",
     "react-router-dom": "^4.2.2",
-    "rebass": "^3.0.0-11",
     "redux": "^4.0.1",
-    "redux-thunk": "^2.3.0",
-    "styled-components": "^4.1.1"
+    "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
     "redux-devtools-extension": "^2.13.5"

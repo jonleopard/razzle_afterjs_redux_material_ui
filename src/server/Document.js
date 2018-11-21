@@ -2,22 +2,30 @@
 import React from 'react';
 import serialize from 'serialize-javascript';
 import { Provider } from 'react-redux';
-import { ServerStyleSheet } from 'styled-components'
 import { AfterRoot, AfterData } from '@jaredpalmer/after';
+
+import {JssProvider, SheetsRegistry} from "react-jss";
+import {createGenerateClassName} from "@material-ui/core/styles";
+import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
 
 export default class Document extends React.Component {
   static async getInitialProps({ assets, data, renderPage }) {
-    const sheet = new ServerStyleSheet()
-    const page = await renderPage(App => props => sheet.collectStyles(<App {...props} />))
-    const styleTags = sheet.getStyleElement()
 
-
-
-    return { assets, data, ...page, styleTags};
+    const sheets = new SheetsRegistry();
+    const generateClassName = createGenerateClassName();
+    const page = await renderPage(After => props => (
+      <JssProvider registry={sheets} generateClassName={generateClassName}>
+        <MuiThemeProvider sheetsManager={new Map()}>
+          <After {...props} />
+        </MuiThemeProvider>
+      </JssProvider>
+      ));
+    
+    return { assets, data, sheets, ...page };
   }
 
  render() {
-    const { helmet, assets, data, styleTags, serverState } = this.props;
+    const { helmet, assets, data, sheets, serverState } = this.props;
     // get attributes from React Helmet
     const htmlAttrs = helmet.htmlAttributes.toComponent();
     const bodyAttrs = helmet.bodyAttributes.toComponent();
@@ -29,11 +37,17 @@ export default class Document extends React.Component {
           <meta charSet="utf-8" />
           <title>Welcome to the Afterparty</title>
           <meta name="viewport" content="width=device-width, initial-scale=1" />
+          <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" />
+          <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
           {helmet.title.toComponent()}
           {helmet.meta.toComponent()}
           {helmet.link.toComponent()}
-          {/** here is where we put our Styled Components styleTags... */}
-          {styleTags}
+          {assets.client.css && (
+            <link rel="stylesheet" href={assets.client.css} />
+          )}
+          <style type="text/css">
+            {sheets.toString()}
+          </style>
         </head>
         <body {...bodyAttrs}>
           <AfterRoot />

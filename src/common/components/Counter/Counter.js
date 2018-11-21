@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import {
@@ -10,14 +9,6 @@ import {
   decrement,
 } from './counterActions';
 
-const Button = styled.button`
-  border-radius: 3px;
-  padding: 0.25em 1em;
-  margin: 0 1em;
-  background: transparent;
-  color: palevioletred;
-  border: 2px solid palevioletred;
-`;
 
 const Counter = ({
   increment,
@@ -29,13 +20,13 @@ const Counter = ({
   <p>
     Clicked: {counter} times
     {' '}
-    <Button onClick={increment}>+</Button>
+    <button onClick={increment}>+</button>
     {' '}
-    <Button onClick={decrement}>-</Button>
+    <button onClick={decrement}>-</button>
     {' '}
-    <Button onClick={incrementIfOdd}>Increment if odd</Button>
+    <button onClick={incrementIfOdd}>Increment if odd</button>
     {' '}
-    <Button onClick={() => incrementAsync()}>Increment async</Button>
+    <button onClick={() => incrementAsync()}>Increment async</button>
   </p>
 );
 
