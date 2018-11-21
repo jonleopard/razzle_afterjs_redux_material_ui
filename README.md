@@ -1,4 +1,4 @@
-# Razzle x After.js w/ Redux and Styled-Components
+# Razzle x After.js w/ Redux and Material UI
 
 This is another demo project to get more familiar with razzle and after js. Project has redux and material ui inside.
 
